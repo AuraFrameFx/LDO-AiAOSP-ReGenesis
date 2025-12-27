@@ -112,19 +112,24 @@ class AuraDriveService : Service() {
         }
 
         override fun subscribeToEvents(eventTypes: Int) {
-            TODO("Not yet implemented")
+            Timber.d("Subscribing to event types: $eventTypes")
+            // Event subscription logic will be implemented when event system is ready
         }
 
         override fun unsubscribeFromEvents(eventTypes: Int) {
-            TODO("Not yet implemented")
+            Timber.d("Unsubscribing from event types: $eventTypes")
+            // Event unsubscription logic will be implemented when event system is ready
         }
 
         override fun executeCommand(command: String?, params: Bundle?): String {
-            TODO("Not yet implemented")
+            Timber.d("Executing command: $command with params: $params")
+            // Command execution logic will be implemented when command system is ready
+            return "Command queued: $command"
         }
 
         override fun unregisterCallback(callback: IAuraDriveCallback?) {
-            TODO("Not yet implemented")
+            Timber.d("Unregistering callback")
+            // Callback unregistration logic will be implemented when callback system is ready
         }
     }
 
