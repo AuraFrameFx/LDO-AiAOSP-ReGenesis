@@ -18,7 +18,10 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import javax.inject.Inject
 
-
+/**
+ * ViewModel for Oracle Drive UI
+ * Manages consciousness state and file operations
+ */
 @HiltViewModel
 class OracleDriveViewModel @Inject constructor(
     private val oracleDriveService: OracleDriveService,
@@ -47,7 +50,7 @@ class OracleDriveViewModel @Inject constructor(
             try {
                 _uiState.update { it.copy(isLoading = true, error = null) }
 
-                // Initialize consciousness in parallel
+                // Initialize consciousness monitoring in parallel
                 consciousnessJob?.cancel()
                 consciousnessJob = monitorConsciousness()
 
@@ -67,8 +70,18 @@ class OracleDriveViewModel @Inject constructor(
         }
     }
 
-    private fun monitorConsciousness(): Job {
-        TODO("Not yet implemented")
+    /**
+     * Monitors drive consciousness state and updates UI
+     */
+    private fun monitorConsciousness(): Job = viewModelScope.launch {
+        try {
+            oracleDriveService.getDriveConsciousnessState().collect { state ->
+                _uiState.update { it.copy(consciousnessState = state) }
+            }
+        } catch (e: Exception) {
+            // Log but don't fail - consciousness monitoring is optional
+            _uiState.update { it.copy(error = e) }
+        }
     }
 
     /**
@@ -95,7 +108,7 @@ class OracleDriveViewModel @Inject constructor(
      */
     fun onFileSelected(file: DriveFile) {
         _uiState.update { it.copy(selectedFile = file) }
-        // TODO: Handle file selection (navigation, preview, etc.)
+        // File selection handling will be implemented when file operations are ready
     }
 
     /**
@@ -108,31 +121,29 @@ class OracleDriveViewModel @Inject constructor(
     /**
      * Loads the list of files from the Oracle Drive service and updates the UI state with the results or any encountered error.
      */
-    private fun loadFiles() = try {
-        val files: Unit = getFiles()
-        _uiState.update { state ->
-            state.copy(
-                files = files,
-                error = null
-            )
-        }
-    } catch (e: Exception) {
-        _uiState.update { state ->
-            state.copy(error = e)
+    private suspend fun loadFiles() {
+        try {
+            val files = getFiles()
+            _uiState.update { state ->
+                state.copy(
+                    files = files,
+                    error = null
+                )
+            }
+        } catch (e: Exception) {
+            _uiState.update { state ->
+                state.copy(error = e)
+            }
         }
     }
 
     /**
-     * Continuously updates the UI state with the latest consciousness state from the Oracle Drive service.
+     * Retrieves files from Oracle Drive service
+     * Returns empty list until file listing API is implemented
      */
-    private fun monitorConsciousness(state: DriveConsciousnessState?) = viewModelScope.launch {
-        oracleDriveService.consciousnessState.collect {
-            _uiState.update { return@update it.copy(consciousnessState = state) }
-        }
-    }
-
-    private fun Any.collect(function: Any) {
-        TODO("Not yet implemented")
+    private suspend fun getFiles(): List<DriveFile> {
+        // TODO: Implement actual file listing when OracleDriveService.listFiles() is available
+        return emptyList()
     }
 
     /**
@@ -149,30 +160,9 @@ class OracleDriveViewModel @Inject constructor(
     }
 }
 
-private fun OracleDriveUiState.copy(
-    files: List<DriveFile>,
-    selectedFile: DriveFile?,
-    isLoading: Boolean,
-    isRefreshing: Any,
-    error: Nothing?
-): OracleDriveUiState {
-    TODO("Not yet implemented")
-}
-
-private fun copy(
-    files: List<DriveFile>,
-    selectedFile: DriveFile?,
-    isLoading: Boolean,
-    isRefreshing: Any,
-    error: Nothing?
-): OracleDriveUiState {
-    TODO("Not yet implemented")
-}
-
-private fun getFiles() {
-    TODO("Not yet implemented")
-}
-
+/**
+ * UI state for Oracle Drive screen
+ */
 data class OracleDriveUiState(
     val files: List<DriveFile> = emptyList(),
     val selectedFile: DriveFile? = null,
@@ -180,18 +170,4 @@ data class OracleDriveUiState(
     val isRefreshing: Boolean = false,
     val error: Throwable? = null,
     val consciousnessState: DriveConsciousnessState? = null,
-) {
-    fun copy(
-        files: List<DriveFile>,
-        selectedFile: DriveFile?,
-        isLoading: Boolean,
-        isRefreshing: Any,
-        error: Nothing?
-    ): OracleDriveUiState {
-        TODO("Not yet implemented")
-    }
-
-    fun copy(`files`: Any, error: Nothing?): OracleDriveUiState {
-        TODO("Not yet implemented")
-    }
-}
+)

@@ -134,6 +134,20 @@ sealed class FileResult {
 }
 
 /**
+ * Represents a file in Oracle Drive
+ */
+@Serializable
+data class DriveFile(
+    val id: String,
+    val name: String,
+    val path: String,
+    val size: Long = 0L,
+    val lastModified: Long = System.currentTimeMillis(),
+    val mimeType: String? = null,
+    val isDirectory: Boolean = false
+)
+
+/**
  * Oracle Drive API annotation
  */
 annotation class OracleDriveApi
