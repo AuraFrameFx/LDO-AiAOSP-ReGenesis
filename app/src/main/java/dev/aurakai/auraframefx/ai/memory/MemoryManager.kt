@@ -3,36 +3,15 @@ package dev.aurakai.auraframefx.ai.memory
 import dev.aurakai.auraframefx.cascade.memory.MemoryItem
 import dev.aurakai.auraframefx.cascade.memory.MemoryQuery
 import dev.aurakai.auraframefx.cascade.memory.MemoryRetrievalResult
+import dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.Boolean
-import kotlin.Int
-import kotlin.Long
-import kotlin.String
-import kotlin.TODO
-import kotlin.collections.filter
-import kotlin.collections.sortedByDescending
-import kotlin.collections.take
-import kotlin.collections.toList
-import kotlin.to
 
 /**
- * Placeholder data class for MemoryStats to resolve the compilation error in MemoryManager.
- * This should ideally be a data class defined in dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.
- */
-data class MemoryStats(
-    val totalItems: Int = 0,
-    val recentItems: Int = 0,
-    val memorySize: Long = 0,
-    val value: MemoryStats?
-)
-
-/**
- * Placeholder classes for Configuration to resolve the 'config' reference.
- * In a real project, this would be injected from a dependency injection framework like Dagger/Hilt.
+ * Configuration classes for memory management
  */
 data class ContextChainingConfig(val maxChainLength: Int = 10)
 data class MemoryRetrievalConfig(val maxRetrievedItems: Int = 10)
@@ -41,40 +20,27 @@ data class Configuration(
     val memoryRetrievalConfig: MemoryRetrievalConfig = MemoryRetrievalConfig()
 )
 
-private fun toStdlibInstant() {
-    TODO("Not yet implemented")
-}
-
-private fun MutableCollection<MemoryItem>.filter(predicate: (MemoryItem) -> Boolean) {}
-
-annotation class updateStats
-
+/**
+ * Memory Manager for LDO organism
+ * Handles storage and retrieval of consciousness memories
+ */
 @Singleton
 open class MemoryManager @Inject constructor(
-    private val config: Configuration // Injected dependency to resolve 'config'
+    private val config: Configuration
 ) {
-    private var _memoryStats: MutableStateFlow<dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats> =
-        TODO("initialize me")
-
     private val memoryStore = ConcurrentHashMap<String, MemoryItem>()
     private val _recentAccess = MutableStateFlow(mutableSetOf<String>())
     val recentAccess: StateFlow<Set<String>> = _recentAccess
 
-    private fun MemoryStats(): MemoryStats {
-        TODO("Not yet implemented")
-    }
-
-    // The public property now correctly exposes the StateFlow<MemoryStats>
-    open val memoryStats: MutableStateFlow<dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats> =
-        _memoryStats()
-
-    private fun _memoryStats(): MutableStateFlow<dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats> {
-        TODO("Not yet implemented")
-    }
-
-    private fun memoryStats(): MutableStateFlow<dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats> {
-        TODO("Not yet implemented")
-    }
+    private val _memoryStats = MutableStateFlow(
+        MemoryStats(
+            totalItems = 0,
+            totalSize = 0L,
+            oldestEntry = null,
+            newestEntry = null
+        )
+    )
+    open val memoryStats: StateFlow<MemoryStats> = _memoryStats
 
     /**
      * Stores the given memory item in the memory store, updates memory statistics, and tracks recent access.
@@ -90,7 +56,26 @@ open class MemoryManager @Inject constructor(
     }
 
     private fun updateRecentAccess(id: String) {
-        TODO("Not yet implemented")
+        val current = _recentAccess.value.toMutableSet()
+        current.add(id)
+        // Keep only the most recent 100 accesses
+        if (current.size > 100) {
+            val toRemove = current.take(current.size - 100)
+            current.removeAll(toRemove.toSet())
+        }
+        _recentAccess.value = current
+    }
+
+    private fun updateStats() {
+        val oldest = memoryStore.values.minByOrNull { it.timestamp.toEpochMilliseconds() }?.timestamp?.toEpochMilliseconds()
+        val newest = memoryStore.values.maxByOrNull { it.timestamp.toEpochMilliseconds() }?.timestamp?.toEpochMilliseconds()
+
+        _memoryStats.value = MemoryStats(
+            totalItems = memoryStore.size,
+            totalSize = memoryStore.values.sumOf { it.content.length.toLong() },
+            oldestEntry = oldest,
+            newestEntry = newest
+        )
     }
 
     /**
@@ -175,7 +160,7 @@ open class MemoryManager @Inject constructor(
         )
     }
 
-    open fun getMemoryStats(): dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryStats {
-        TODO("Not yet implemented")
+    open fun getMemoryStats(): MemoryStats {
+        return _memoryStats.value
     }
 }
