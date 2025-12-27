@@ -10,8 +10,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.aurakai.auraframefx.models.agent_states.ProcessingState
-import dev.aurakai.auraframefx.models.agent_states.VisionState
+import dev.aurakai.auraframefx.cascade.ProcessingState
+import dev.aurakai.auraframefx.cascade.VisionState
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 

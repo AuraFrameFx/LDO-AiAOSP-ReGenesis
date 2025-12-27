@@ -116,38 +116,6 @@ class AuraMoodViewModel : androidx.lifecycle.ViewModel() {
     val moodState = kotlinx.coroutines.flow.MutableStateFlow(MoodState())
 }
 
-private val DarkColorScheme = darkColorScheme(
-    primary = NeonTeal,
-    onPrimary = OnPrimary,
-    primaryContainer = NeonTeal.copy(alpha = 0.2f),
-    onPrimaryContainer = OnPrimary,
-
-    secondary = NeonPurple,
-    onSecondary = OnSecondary,
-    secondaryContainer = NeonPurple.copy(alpha = 0.2f),
-    onSecondaryContainer = OnSecondary,
-
-    tertiary = NeonBlue,
-    onTertiary = OnTertiary,
-    tertiaryContainer = NeonBlue.copy(alpha = 0.2f),
-    onTertiaryContainer = OnTertiary,
-
-    background = DarkBackground,
-    onBackground = OnSurface,
-
-    surface = Surface,
-    onSurface = OnSurface,
-    surfaceVariant = SurfaceVariant,
-    onSurfaceVariant = OnSurfaceVariant,
-
-    error = ErrorColor,
-    onError = OnPrimary,
-    errorContainer = ErrorColor.copy(alpha = 0.2f),
-    onErrorContainer = OnPrimary,
-
-    outline = OnSurfaceVariant,
-    outlineVariant = SurfaceVariant
-)
 
 private val LightColorScheme = lightColorScheme(
     primary = LightPrimary,

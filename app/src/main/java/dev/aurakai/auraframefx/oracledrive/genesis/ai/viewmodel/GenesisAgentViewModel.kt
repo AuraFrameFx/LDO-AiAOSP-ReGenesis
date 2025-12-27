@@ -1,13 +1,13 @@
 package dev.aurakai.auraframefx.oracledrive.genesis.ai.viewmodel
 
-import AgentPriority
+import dev.aurakai.auraframefx.models.AgentPriority
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.aurakai.auraframefx.models.AgentRole
 import dev.aurakai.auraframefx.models.AgentType
 import dev.aurakai.auraframefx.models.HierarchyAgentConfig
-import dev.aurakai.auraframefx.oracledrive.genesis.ai.task.HistoricalTask
+import dev.aurakai.auraframefx.models.HistoricalTask
 import dev.aurakai.auraframefx.utils.AppConstants.STATUS_ERROR
 import dev.aurakai.auraframefx.utils.AppConstants.STATUS_IDLE
 import dev.aurakai.auraframefx.utils.AppConstants.STATUS_PROCESSING
@@ -178,11 +178,10 @@ class GenesisAgentViewModel @Inject constructor(
 
     private fun addTaskToHistory(agent: AgentType, description: String) {
         val newTask = HistoricalTask(
-            id = System.currentTimeMillis(),
-            agentType = agent,
-            description = description,
-            timestamp = System.currentTimeMillis(),
-            status = "Completed"
+            id = System.currentTimeMillis().toString(),
+            description = "[$agent] $description",
+            status = "Completed",
+            timestamp = System.currentTimeMillis()
         )
         _taskHistory.value = _taskHistory.value + newTask
     }

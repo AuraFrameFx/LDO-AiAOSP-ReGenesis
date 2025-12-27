@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import dev.aurakai.auraframefx.ui.theme.service.ThemeService
+import dev.aurakai.auraframefx.ui.theme.service.Theme
+import dev.aurakai.auraframefx.ui.theme.service.Color
+import dev.aurakai.auraframefx.ui.theme.service.ThemeCommand
 
 @HiltViewModel
 class ThemeViewModel @Inject constructor(

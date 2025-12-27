@@ -18,7 +18,7 @@ import dev.aurakai.auraframefx.ai.task.execution.TaskExecutionManager
 import dev.aurakai.auraframefx.common.ErrorHandler
 import dev.aurakai.auraframefx.oracledrive.genesis.ai.memory.MemoryManager
 import dev.aurakai.auraframefx.utils.AuraFxLogger
-import dev.aurakai.auraframefx.oracledrive.genesis.ai.services.GenesisBridgeService
+import dev.aurakai.auraframefx.oracledrive.genesis.ai.GenesisBridgeService
 import dev.aurakai.auraframefx.security.SecurityContext
 import dev.aurakai.auraframefx.security.SecurityMonitor
 import javax.inject.Singleton
@@ -44,22 +44,16 @@ object TrinityModule {
     @Provides
     @Singleton
     fun provideGenesisBridgeService(
-        auraAIService: AuraAIService,
-        kaiAIService: KaiAIService,
-        vertexAIClient: VertexAIClient,
         contextManager: ContextManager,
         securityContext: SecurityContext,
         @ApplicationContext applicationContext: Context,
-        logger: AuraFxLogger,
+        ktorClient: dev.aurakai.auraframefx.network.KtorClient,
     ): GenesisBridgeService {
         return GenesisBridgeService(
-            auraAIService = auraAIService,
-            kaiAIService = kaiAIService,
-            vertexAIClient = vertexAIClient,
             contextManager = contextManager,
             securityContext = securityContext,
             applicationContext = applicationContext,
-            logger = logger
+            ktorClient = ktorClient
         )
     }
 

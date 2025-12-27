@@ -18,7 +18,7 @@ interface AuraTheme {
     val lightColorScheme: ColorScheme
     val darkColorScheme: ColorScheme
     val accentColor: Color
-    val animationStyle: AuraThemeData.AnimationStyle
+    val animationStyle: AnimationStyle
 
     enum class AnimationStyle {
         SUBTLE, ENERGETIC, CALMING, PULSING, FLOWING
@@ -33,7 +33,7 @@ object CyberpunkTheme : AuraTheme {
     override val name = "Cyberpunk"
     override val description = "High-energy neon aesthetics for a futuristic feel"
     override val accentColor = Color(0xFF00FFFF) // Cyan neon
-    override val animationStyle: ENERGETIC = AnimationStyle.ENERGETIC
+    override val animationStyle = AuraTheme.AnimationStyle.ENERGETIC
 
     override val lightColorScheme = lightColorScheme(
         primary = Color(0xFF00FFFF),
@@ -82,7 +82,7 @@ object SolarFlareTheme : AuraTheme {
     override val name = "Solar Flare"
     override val description = "Warm, energizing colors to brighten your day"
     override val accentColor = Color(0xFFFFB000) // Golden orange
-    override val animationStyle = AnimationStyle.PULSING
+    override val animationStyle = AuraTheme.AnimationStyle.PULSING
 
     override val lightColorScheme = lightColorScheme(
         primary = Color(0xFFFFB000),
@@ -131,7 +131,7 @@ object ForestTheme : AuraTheme {
     override val name = "Forest"
     override val description = "Natural, calming colors for peace and focus"
     override val accentColor = Color(0xFF4CAF50) // Forest green
-    override val animationStyle = AnimationStyle.FLOWING
+    override val animationStyle = AuraTheme.AnimationStyle.FLOWING
 
     override val lightColorScheme = lightColorScheme(
         primary = Color(0xFF4CAF50),

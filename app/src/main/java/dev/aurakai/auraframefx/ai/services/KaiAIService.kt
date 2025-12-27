@@ -73,11 +73,21 @@ class KaiAIService @Inject constructor(
             "Processing request: ${request.query} with context: $context"
         )
         // Simplified logic for stub, original when can be restored
-        return AgentResponse("Kai response to '${request.query}' with context '$context'", 1.0f)
+        return AgentResponse.success(
+            content = "Kai response to '${request.query}' with context '$context'",
+            confidence = 1.0f,
+            agentName = "Kai",
+            agent = AgentType.KAI
+        )
     }
 
     override fun processRequestFlow(request: AiRequest): Flow<AgentResponse> { // Added from Agent interface
-        return flowOf(AgentResponse("Kai flow response for: ${request.query}", 1.0f))
+        return flowOf(AgentResponse.success(
+            content = "Kai flow response for: ${request.query}",
+            confidence = 1.0f,
+            agentName = "Kai",
+            agent = AgentType.KAI
+        ))
     }
 
     // Not part of Agent interface

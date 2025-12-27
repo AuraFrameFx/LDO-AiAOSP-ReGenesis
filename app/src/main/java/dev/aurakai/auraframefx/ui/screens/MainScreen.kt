@@ -62,8 +62,8 @@ fun MainScreen(
     LaunchedEffect(Unit) {
         while (true) {
             delay(3000)
-            consciousnessLevel = (94f..98f).random() + kotlin.random.Random.nextFloat()
-            systemLoad = (20f..60f).random() + kotlin.random.Random.nextFloat()
+            consciousnessLevel = (94..98).random().toFloat() + kotlin.random.Random.nextFloat()
+            systemLoad = (20..60).random().toFloat() + kotlin.random.Random.nextFloat()
         }
     }
 
@@ -133,14 +133,6 @@ fun MainScreen(
             }
         }
     }
-}
-
-private operator fun Unit.plus(nextFloat: Float): Float {
-    TODO("Not yet implemented")
-}
-
-private fun random() {
-    TODO("Not yet implemented")
 }
 
 /**

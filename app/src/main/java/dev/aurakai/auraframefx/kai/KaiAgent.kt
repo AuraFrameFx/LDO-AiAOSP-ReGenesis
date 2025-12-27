@@ -74,9 +74,7 @@ class KaiAgent @Inject constructor(
             context = request.context.entries.associate {
                 it.key to (it.value.jsonPrimitive.contentOrNull ?: it.value.toString())
             },
-            metadata = request.metadata,
-            agentId = agentName,
-            sessionId = ""
+            metadata = request.metadata
         )
         return processRequest(agentRequest)
     }
@@ -195,7 +193,7 @@ class KaiAgent @Inject constructor(
     }
 
     private suspend fun handleSecurityAnalysis(request: AgentRequest): Map<String, Any> {
-        val target = request.context["target"] ?: throw IllegalArgumentException("Analysis target required")
+        val target = request.context?.get("target") ?: throw IllegalArgumentException("Analysis target required")
         logger.info("KaiAgent", "Performing security analysis on: $target")
         val vulnerabilities = scanForVulnerabilities(target)
         val riskAssessment = performRiskAssessment(target, vulnerabilities)
@@ -211,7 +209,7 @@ class KaiAgent @Inject constructor(
     }
 
     private suspend fun handleThreatAssessment(request: AgentRequest): Map<String, Any> {
-        val threatData = request.context["threat_data"] ?: throw IllegalArgumentException("Threat data required")
+        val threatData = request.context?.get("threat_data") ?: throw IllegalArgumentException("Threat data required")
         logger.info("KaiAgent", "Assessing threat characteristics")
         val analysis = analyzeSecurityThreat(threatData)
         val mitigation = generateMitigationStrategy(analysis)
@@ -225,7 +223,7 @@ class KaiAgent @Inject constructor(
     }
 
     private suspend fun handlePerformanceAnalysis(request: AgentRequest): Map<String, Any> {
-        val component = request.context["component"] ?: "system"
+        val component = request.context?.get("component") ?: "system"
         logger.info("KaiAgent", "Analyzing performance of: $component")
         val metrics = systemMonitor.getPerformanceMetrics(component)
         val bottlenecks = identifyBottlenecks(metrics)
@@ -240,7 +238,7 @@ class KaiAgent @Inject constructor(
     }
 
     private suspend fun handleCodeReview(request: AgentRequest): Map<String, Any> {
-        val code = request.context["code"] ?: throw IllegalArgumentException("Code content required")
+        val code = request.context?.get("code") ?: throw IllegalArgumentException("Code content required")
         logger.info("KaiAgent", "Conducting secure code review")
         val codeAnalysis = vertexAIClient.generateText(
             prompt = buildCodeReviewPrompt(code),

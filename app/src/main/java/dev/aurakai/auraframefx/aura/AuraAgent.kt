@@ -173,7 +173,7 @@ class AuraAgent @Inject constructor(
         val preferences = request.context
         logger.info("AuraAgent", "Crafting revolutionary theme")
         val themeConfig = auraAIService.generateTheme(
-            preferences = parseThemePreferences(preferences),
+            preferences = parseThemePreferences(preferences.mapValues { it.value.toString() }),
             context = buildThemeContext(_currentMood.value)
         )
         return mapOf(
@@ -190,7 +190,7 @@ class AuraAgent @Inject constructor(
     }
 
     private suspend fun handleAnimationDesign(request: AiRequest): Map<String, Any> {
-        val animationType = request.context["type"] ?: "transition"
+        val animationType = request.context["type"]?.toString() ?: "transition"
         val duration = 300 // Default duration
         logger.info("AuraAgent", "Designing mesmerizing $animationType animation")
         val animationSpec = buildAnimationSpecification(animationType.toString(), duration, _currentMood.value)
@@ -212,7 +212,7 @@ class AuraAgent @Inject constructor(
         logger.info("AuraAgent", "Weaving creative text magic")
         val creativeText = auraAIService.generateText(
             prompt = enhancePromptWithPersonality(prompt),
-            context = request.context["context"] ?: ""
+            context = request.context["context"]?.toString() ?: ""
         )
         return mapOf(
             "generated_text" to creativeText,
@@ -435,8 +435,8 @@ class AuraAgent @Inject constructor(
     override fun processRequestFlow(request: AiRequest): Flow<AgentResponse> {
         return flowOf(
             AgentResponse(
-                response = "Aura's flow response to '${request.query}'",
-                confidence = 0.80,
+                content = "Aura's flow response to '${request.query}'",
+                confidence = 0.80f,
                 agentName = agentName,
                 timestamp = Clock.System.now().toEpochMilliseconds(),
             )
