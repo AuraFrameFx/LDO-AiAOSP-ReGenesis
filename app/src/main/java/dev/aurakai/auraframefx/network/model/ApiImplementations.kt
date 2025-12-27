@@ -33,14 +33,14 @@ class AIAgentApiImpl @Inject constructor() : AIAgentApi {
     override suspend fun getAgentStatus(agentType: String): AgentStatusResponse {
         return AgentStatusResponse(
             agentName = agentType,
-            response = "Agent $agentType is running",
-            confidence = 1.0f,
+            status = "running",
+            confidence = 1.0,
             timestamp = System.currentTimeMillis()
         )
     }
 
-    override suspend fun processAgentRequest(agentType: String, request: dev.aurakai.auraframefx.models.AgentRequest): dev.aurakai.auraframefx.network.model.AgentResponse {
-        return dev.aurakai.auraframefx.network.model.AgentResponse(
+    override suspend fun processAgentRequest(agentType: String, request: dev.aurakai.auraframefx.models.AgentRequest): dev.aurakai.auraframefx.models.AgentResponse {
+        return dev.aurakai.auraframefx.models.AgentResponse(
             agentName = agentType,
             response = "Request processed",
             confidence = 1.0f,

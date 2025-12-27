@@ -7,8 +7,8 @@ import dev.aurakai.auraframefx.models.AgentStatus
 import dev.aurakai.auraframefx.models.Theme
 import dev.aurakai.auraframefx.models.UserData
 import dev.aurakai.auraframefx.network.AuraApiServiceWrapper
-import dev.aurakai.auraframefx.network.model.*
-import dev.aurakai.auraframefx.models.*
+import dev.aurakai.auraframefx.network.model.AgentStatusResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -39,7 +39,7 @@ open class TrinityRepository @Inject constructor(
      */
     fun getAgentStatus(agentType: String) = flow {
         try {
-            val response = apiService.aiAgentApi.getAgentStatus()
+            val response = apiService.aiAgentApi.getAgentStatus(agentType)
             emit(success(mapToDomainAgentStatus(response)))
         } catch (e: Exception) {
             emit(failure(e))
@@ -49,12 +49,12 @@ open class TrinityRepository @Inject constructor(
     private fun mapToDomainAgentStatus(agentResponse: AgentStatusResponse): AgentStatus {
         return AgentStatus(
             agentId = agentResponse.agentName ?: "unknown",
-            status = if ((agentResponse.confidence ?: 0f) > 0.7f) AgentStatus.Status.ACTIVE else AgentStatus.Status.IDLE,
+            status = if ((agentResponse.confidence ?: 0.0) > 0.7) AgentStatus.Status.ACTIVE else AgentStatus.Status.IDLE,
             lastActiveTimestamp = agentResponse.timestamp ?: 0L,
             isAvailable = agentResponse.error == null,
             capabilities = emptyList(),
             error = agentResponse.error,
-            metadata = agentResponse.metadata ?: emptyMap()
+            metadata = agentResponse.metadata?.mapValues { it.value.toString() } ?: emptyMap()
         )
     }
 

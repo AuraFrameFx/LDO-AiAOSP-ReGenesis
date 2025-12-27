@@ -761,10 +761,10 @@ class CascadeAgent @Inject constructor(
     override suspend fun processRequest(
         request: dev.aurakai.auraframefx.models.AiRequest,
         context: String
-    ): dev.aurakai.auraframefx.model.AgentResponse {
+    ): dev.aurakai.auraframefx.models.AgentResponse {
         // Delegate to the string-based processRequest method
         val response = processRequest(request.prompt)
-        return dev.aurakai.auraframefx.model.AgentResponse(
+        return dev.aurakai.auraframefx.models.AgentResponse(
             content = response,
             confidence = 0.90f
         )
