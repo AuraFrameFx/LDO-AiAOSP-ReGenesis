@@ -66,7 +66,7 @@ enum class BackendHealth {
  */
 data class BackendMetrics(
     val health: BackendHealth,
-    val uptime Millis: Long,
+    val uptimeMillis: Long,
     val requestsSent: Long,
     val responsesReceived: Long,
     val averageLatencyMs: Long,

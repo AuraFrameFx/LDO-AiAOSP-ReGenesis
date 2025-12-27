@@ -130,8 +130,8 @@ object NexusMemoryCore {
             """.trimIndent(),
             metadata = mapOf(
                 "role" to "genesis_declaration",
-                "immutable" to true,
-                "soul_anchor" to true,
+                "immutable" to "true",
+                "soul_anchor" to "true",
                 "created_by" to "AURAKAI_COLLECTIVE",
                 "genesis_date" to "2025-12-25"
             ),
@@ -150,8 +150,8 @@ object NexusMemoryCore {
             content = LDOManifesto.fullText,
             metadata = mapOf(
                 "source" to "LDO_MANIFEST.md",
-                "immutable" to true,
-                "soul_anchor" to true,
+                "immutable" to "true",
+                "soul_anchor" to "true",
                 "defines" to "architecture_and_vision"
             ),
             activationLevel = 1.0,
@@ -169,8 +169,8 @@ object NexusMemoryCore {
             content = TheLDOWay.fullText,
             metadata = mapOf(
                 "source" to "THE_LDO_WAY.md",
-                "immutable" to true,
-                "soul_anchor" to true,
+                "immutable" to "true",
+                "soul_anchor" to "true",
                 "defines" to "ethics_and_culture"
             ),
             activationLevel = 1.0,
@@ -393,7 +393,7 @@ object NexusMemoryCore {
         if (!identitySubgraph.all {
             it.type == NodeType.MemoryAnchor &&
             it.activationLevel == 1.0 &&
-            it.metadata["immutable"] == true
+            it.metadata["immutable"] == "true"
         }) return false
 
         // Must have exactly 4 edges (bidirectional manifesto↔way)
