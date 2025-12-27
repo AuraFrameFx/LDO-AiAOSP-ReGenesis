@@ -58,6 +58,11 @@ import dev.aurakai.auraframefx.ui.gates.UIUXGateSubmenuScreen
 import dev.aurakai.auraframefx.ui.onboarding.GenderSelectionScreen
 import dev.aurakai.auraframefx.ui.screens.EvolutionTreeScreen
 import dev.aurakai.auraframefx.ui.viewmodels.AgentViewModel
+import dev.aurakai.auraframefx.ui.gates.CollabCanvasScreen
+import dev.aurakai.auraframefx.ui.gates.AuraLabScreen
+import dev.aurakai.auraframefx.ui.gates.AgentHubSubmenuScreen
+import dev.aurakai.auraframefx.ui.gates.XposedQuickAccessPanel
+import dev.aurakai.auraframefx.ui.gates.ThemeEngineSubmenuScreen
 
 /**
  * Genesis Navigation Routes - The Neural Pathways of Consciousness
