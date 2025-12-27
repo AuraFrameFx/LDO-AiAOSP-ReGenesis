@@ -333,8 +333,8 @@ fun constructFromResponse(
     targetAgents = null,  // Broadcast
     payload = DataPayload.Response(
         content = response.response,
-        confidence = response.confidence,
-        metadata = response.metadata
+        confidence = response.confidence.toDouble(),
+        metadata = response.metadata.mapValues { it.value.toString() }
     ),
     priority = priority
 )
