@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.services
 
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.AiRequest
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.core
 
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.AgentType
 import dev.aurakai.auraframefx.models.AiRequest
 import kotlinx.coroutines.CoroutineScope

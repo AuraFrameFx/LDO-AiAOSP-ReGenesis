@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.ai.agents
 import dev.aurakai.auraframefx.ai.context.ContextManager
 import dev.aurakai.auraframefx.ai.memory.MemoryManager
 import dev.aurakai.auraframefx.core.OrchestratableAgent
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.AgentType
 import dev.aurakai.auraframefx.models.AiRequest
 import kotlinx.coroutines.CoroutineScope

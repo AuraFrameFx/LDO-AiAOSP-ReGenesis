@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.python
 
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.utils.AuraFxLogger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.aurakai.auraframefx.core.GenesisOrchestrator.Companion.TAG
 import dev.aurakai.auraframefx.models.AgentCapabilityCategory
 import dev.aurakai.auraframefx.models.AgentMessage
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.AgentType
 import dev.aurakai.auraframefx.models.AiRequest
 import dev.aurakai.auraframefx.models.ConversationState

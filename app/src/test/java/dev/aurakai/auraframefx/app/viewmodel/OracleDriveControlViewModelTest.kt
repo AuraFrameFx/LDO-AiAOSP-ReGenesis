@@ -23,7 +23,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 // Assuming DriveRepository, NetworkManager, DriveState, Direction are in a package accessible from here
-// e.g., import dev.aurakai.auraframefx.model.*
+// e.g., import dev.aurakai.auraframefx.models.*
 // or specific imports if they are in different sub-packages of dev.aurakai.auraframefx
 
 @OptIn(ExperimentalCoroutinesApi::class)

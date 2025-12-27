@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.aura.ui
 
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.Theme
 import dev.aurakai.auraframefx.models.UserData
 

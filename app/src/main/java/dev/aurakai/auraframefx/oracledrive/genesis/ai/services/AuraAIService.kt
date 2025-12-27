@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.oracledrive.genesis.ai.services
 /**
  * Genesis AI Service Interface
  */
-import dev.aurakai.auraframefx.model.AgentResponse
+import dev.aurakai.auraframefx.models.AgentResponse
 import dev.aurakai.auraframefx.models.AgentType
 import dev.aurakai.auraframefx.models.AiRequest
 import dev.aurakai.auraframefx.models.ThemeConfiguration
