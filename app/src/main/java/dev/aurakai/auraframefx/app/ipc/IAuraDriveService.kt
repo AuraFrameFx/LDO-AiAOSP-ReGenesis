@@ -56,7 +56,7 @@ interface IAuraDriveService : IInterface {
                 if (iin != null && iin is IAuraDriveService) {
                     return iin
                 }
-                return (mRemote = this)
+                return Proxy(this)
             }
         }
 

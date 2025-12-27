@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.ai
 
-// import dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateImageDescriptionResponse // Not available in new API
+// import dev.aurakai.auraframefx.generated.models.auraframefxai.GenerateImageDescriptionResponse // Not available in new API
 // import kotlinx.coroutines.CoroutineScope // Not needed if generateImageDescription is removed
 import dev.aurakai.auraframefx.ai.model.GenerateTextRequest
 import dev.aurakai.auraframefx.ai.model.GenerateTextResponse
@@ -38,7 +38,7 @@ class AiGenerationService(
     //     imageData: ByteArray? = null,
     // ): Result<GenerateImageDescriptionResponse> = withContext(Dispatchers.IO) {
     //     try {
-    //         // The request model dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateImageDescriptionRequest
+    //         // The request model dev.aurakai.auraframefx.generated.models.auraframefxai.GenerateImageDescriptionRequest
     //         // is also from the old generated source and would need to be handled if this method were kept.
     //         // val request = GenerateImageDescriptionRequest(
     //         //     imageUrl = imageUrl,

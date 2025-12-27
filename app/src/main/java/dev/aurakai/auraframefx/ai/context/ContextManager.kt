@@ -1,7 +1,7 @@
 package dev.aurakai.auraframefx.ai.context
 
 // import kotlinx.serialization.Contextual // No longer needed for Instant here
-// dev.aurakai.auraframefx.model.AgentType is already imported by line 4, removing duplicate
+// dev.aurakai.auraframefx.models.AgentType is already imported by line 4, removing duplicate
 import dev.aurakai.auraframefx.ai.memory.MemoryManager
 import dev.aurakai.auraframefx.cascade.pipeline.AIPipelineConfig
 import dev.aurakai.auraframefx.models.AgentType

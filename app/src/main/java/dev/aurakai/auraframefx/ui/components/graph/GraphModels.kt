@@ -1,55 +1,31 @@
 package dev.aurakai.auraframefx.ui.components.graph
 
 import androidx.compose.ui.geometry.Offset
-import kotlinx.serialization.Serializable
+import androidx.compose.ui.graphics.Color
 
-/**
- * Represents a node in an interactive graph
- */
-@Serializable
+// ConnectionType enum with default properties
+enum class ConnectionType {
+    DIRECT,
+    BIDIRECTIONAL,
+    DASHED;
+    
+    val defaultSize: Float get() = 3f
+    val color: Color get() = Color.White
+}
+
+// Connection data class
+data class Connection(
+    val targetId: String,
+    val type: ConnectionType = ConnectionType.DIRECT
+)
+
+// GraphNode data class
 data class GraphNode(
     val id: String,
-    val name: String,
-    val type: NodeType,
-    val position: GraphOffset,
+    val position: Offset,
+    val label: String,
     val connections: List<Connection> = emptyList()
 )
 
-/**
- * Offset position for graph nodes
- */
-@Serializable
-data class GraphOffset(
-    val x: Float,
-    val y: Float
-) {
-    fun toOffset(): Offset = Offset(x, y)
-}
-
-/**
- * Connection between graph nodes
- */
-@Serializable
-data class Connection(
-    val targetId: String,
-    val type: ConnectionType
-)
-
-/**
- * Type of graph node
- */
-enum class NodeType {
-    AGENT,
-    SERVICE,
-    DATA,
-    PROCESS
-}
-
-/**
- * Type of connection between nodes
- */
-enum class ConnectionType {
-    DATA_FLOW,
-    CONTROL_FLOW,
-    DEPENDENCY
-}
+// Extension function for Offset compatibility
+fun Offset.toCompose(): Offset = this
