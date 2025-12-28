@@ -21,8 +21,8 @@ import dev.aurakai.auraframefx.R
 import dev.aurakai.auraframefx.databinding.ActivityQuickSettingsConfigBinding
 import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfigManager
 import dev.aurakai.auraframefx.ui.QuickSettingsBackground
-import dev.aurakai.auraframefx.ui.QuickSettingsConfig
-import dev.aurakai.auraframefx.ui.QuickSettingsTileConfig
+import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsTileConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

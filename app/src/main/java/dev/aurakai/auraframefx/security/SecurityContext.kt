@@ -396,7 +396,8 @@ enum class SecurityEventType {
     ENCRYPTION_EVENT,
     AUTHENTICATION_EVENT,
     INTEGRITY_CHECK,
-    VALIDATION
+    VALIDATION,
+    AI_ERROR
 }
 
 enum class EventSeverity {
