@@ -148,6 +148,34 @@ data class DriveFile(
 )
 
 /**
+ * Security validation models
+ */
+@Serializable
+data class SecurityCheck(
+    val isValid: Boolean,
+    val reason: String = ""
+)
+
+@Serializable
+data class AccessCheck(
+    val isAllowed: Boolean,
+    val reason: String = ""
+)
+
+@Serializable
+data class DeletionValidation(
+    val isAuthorized: Boolean,
+    val reason: String = ""
+)
+
+@Serializable
+data class SecurityValidation(
+    val isSecure: Boolean,
+    val threatLevel: Int = 0,
+    val reason: String = ""
+)
+
+/**
  * Oracle Drive API annotation
  */
 annotation class OracleDriveApi
