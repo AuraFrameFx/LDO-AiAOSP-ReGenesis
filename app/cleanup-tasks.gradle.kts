@@ -29,7 +29,7 @@ tasks.register<Delete>("cleanAllGeneratedFiles") {
     doLast {
         println("🧹 Comprehensive cleanup completed!")
         println("✅ All generated files cleaned")
-        println("🔄 Ready for fresh build with Java 21 + AGP 9.0.0-alpha02")
+        println("🔄 Ready for fresh build with Java 25 + AGP 9.0.0-alpha02")
     }
 }
 
@@ -54,8 +54,8 @@ tasks.register("aegenesisHealthCheck") {
         println("🧠 KSP Mode: $kspMode ${if (kspMode == "false") "✅ (Fixed NullPointer)" else "⚠️"}")
 
         // Java Version Consistency
-        println("🎯 Java 21 Toolchain: ✅ Configured")
-        println("🔧 Compile Target: Java 21 (JVM_21)")
+        println("🎯 Java 25 Toolchain: ✅ Configured")
+        println("🔧 Compile Target: Java 25 (JVM_25)")
 
         // Unified API Status
         val apiFile = layout.projectDirectory.file("api/unified-aegenesis-api.yml").asFile

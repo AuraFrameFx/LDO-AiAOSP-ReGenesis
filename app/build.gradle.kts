@@ -164,7 +164,7 @@ dependencies {
     // ✅ Kotlin Coroutines (core + android)
     // ✅ Kotlin Serialization JSON
     // ✅ Timber (logging)
-    // ✅ Core library desugaring (Java 24 APIs)
+    // ✅ Core library desugaring (Java 25 APIs)
     // ✅ Firebase BOM
     // ✅ Xposed API (compileOnly) + EzXHelper
     //
@@ -288,7 +288,7 @@ dependencies {
     // AI & ML - Google Generative AI SDK
     implementation(libs.generativeai)
 
-    // Core Library Desugaring (Java 24 APIs)
+    // Core Library Desugaring (Java 25 APIs)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     // ═══════════════════════════════════════════════════════════════════════════

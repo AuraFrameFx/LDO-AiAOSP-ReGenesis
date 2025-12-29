@@ -19,7 +19,7 @@ dependencies {
     // ✅ Coroutines (core + android)
     // ✅ Serialization JSON
     // ✅ Compose enabled
-    // ✅ Core library desugaring (Java 24 APIs)
+    // ✅ Core library desugaring (Java 25 APIs)
     // ✅ Xposed API (compileOnly) + EzXHelper
     // ═══════════════════════════════════════════════════════════════════════
 

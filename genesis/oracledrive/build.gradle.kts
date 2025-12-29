@@ -20,7 +20,7 @@ dependencies {
     // ✅ Coroutines (core + android)
     // ✅ Serialization JSON
     // ✅ Compose enabled
-    // ✅ Core library desugaring (Java 21 APIs)
+    // ✅ Core library desugaring (Java 25 APIs)
     // ✅ Xposed API (compileOnly) + EzXHelper
     // ═══════════════════════════════════════════════════════════════════════
 
@@ -44,7 +44,7 @@ dependencies {
     // Xposed API (compile-only, not bundled in APK)
     compileOnly(files("$projectDir/libs/api-82.jar"))
 
-    // Core Library Desugaring (Java 21 APIs)
+    // Core Library Desugaring (Java 25 APIs)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
