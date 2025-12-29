@@ -32,15 +32,12 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import dev.aurakai.auraframefx.ui.components.graph.Connection
-import dev.aurakai.auraframefx.ui.components.graph.ConnectionType
-import dev.aurakai.auraframefx.ui.components.graph.GraphNode
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
-import dev.aurakai.auraframefx.ui.components.graph.Offset
+import dev.aurakai.auraframefx.ui.components.graph.Offset as GraphOffset
 
 /**
  * Displays an interactive, zoomable, and pannable graph visualization with selectable nodes.
@@ -359,36 +356,7 @@ fun Dp.toPx(drawScope: DrawScope): Float = with(drawScope) { this@toPx.toPx() }
 // Helper extension for GraphOffset to Compose Offset - already defined in Composable
 // fun Offset.toCompose(): Offset = Offset(this.x.toFloat(), this.y.toFloat())
 
-/**
- * Returns the sum of this [Offset] and another [Offset] as a new [Offset].
- *
- * The resulting [Offset] has its x and y components added element-wise.
- *
- * @return The element-wise sum of the two offsets.
- */
-private operator fun Offset.plus(other: Offset): Offset {
-    return Offset(x + other.x, y + other.y)
-}
 
-/**
- * Returns the vector difference between this [Offset] and another [Offset].
- *
- * @return A new [Offset] representing the component-wise subtraction.
- */
-private operator fun Offset.minus(other: Offset): Offset {
-    return Offset(x - other.x, y - other.y)
-}
-
-/**
- * Divides the components of this [Offset] by the given scalar value.
- *
- * @param scalar The value to divide both x and y components by.
- * @return A new [Offset] with each component divided by [scalar].
- */
-private operator fun Offset.div(scalar: Float): Offset {
-    if (scalar == 0f) return Offset.Zero // Avoid division by zero
-    return Offset(x / scalar, y / scalar)
-}
 
 /**
  * Rotates this offset by the given angle in radians.
@@ -398,18 +366,8 @@ private operator fun Offset.div(scalar: Float): Offset {
  * @param angle The rotation angle in radians.
  * @return The rotated offset.
  */
-fun Offset.rotate(angle: Float): Offset {
+fun androidx.compose.ui.geometry.Offset.rotate(angle: Float): androidx.compose.ui.geometry.Offset {
     val cosAngle = cos(angle)
     val sinAngle = sin(angle)
-    return Offset(x * cosAngle - y * sinAngle, x * sinAngle + y * cosAngle)
-}
-
-/**
- * Multiplies the components of this [Offset] by the given scalar value.
- *
- * @param scalar The value to multiply both x and y components by.
- * @return A new [Offset] with each component multiplied by [scalar].
- */
-private operator fun Offset.times(scalar: Float): Offset {
-    return Offset(x * scalar, y * scalar)
+    return androidx.compose.ui.geometry.Offset(x * cosAngle - y * sinAngle, x * sinAngle + y * cosAngle)
 }

@@ -1,4 +1,4 @@
-package dev.aurakai.auraframefx.ui.debug.model
+package dev.aurakai.auraframefx.ui.components.graph
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -79,11 +79,11 @@ data class Offset(val x: Float, val y: Float) {
      * @param other The offset to which the distance is measured.
      * @return The straight-line distance between the two offsets.
      */
-    fun distanceTo(other: Offset): Float {
-        val dx = x - other.x
         val dy = y - other.y
         return sqrt(dx * dx + dy * dy)
     }
+
+    fun toCompose(): androidx.compose.ui.geometry.Offset = androidx.compose.ui.geometry.Offset(x, y)
 }
 
 @Immutable
