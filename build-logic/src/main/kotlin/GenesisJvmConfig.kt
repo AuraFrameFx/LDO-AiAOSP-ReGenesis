@@ -41,7 +41,8 @@ object GenesisJvmConfig {
      */
     fun configureKotlinJvm(project: Project) {
         with(project) {
-            // Configure Kotlin compilation options with opt-ins (works for both built-in and external)
+            // Configure Kotlin compilation to match Java toolchain
+            // MUST match the target used in GenesisApplicationPlugin and GenesisLibraryHiltPlugin (JVM 25)
             tasks.withType<KotlinJvmCompile>().configureEach {
                 compilerOptions {
                     freeCompilerArgs.addAll(
