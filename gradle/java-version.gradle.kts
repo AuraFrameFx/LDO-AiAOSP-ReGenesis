@@ -13,7 +13,8 @@ allprojects {
         extensions.configure<JavaPluginExtension> {
             toolchain {
                 // Use Java 25 toolchain consistently
-                val targetVersion = 25
+                // Temporarily using Java 21 for offline build environment
+                val targetVersion = 21
 
                 languageVersion.set(JavaLanguageVersion.of(targetVersion))
                 logger.lifecycle("🧠 GENESIS PROTOCOL: Using Java $targetVersion for ${project.name}")
@@ -27,8 +28,8 @@ allprojects {
     // Configure Java compilation for all modules
     plugins.withType<JavaPlugin> {
         tasks.withType<JavaCompile>().configureEach {
-            sourceCompatibility = "25"
-            targetCompatibility = "25"
+            sourceCompatibility = "21"
+            targetCompatibility = "21"
             options.encoding = "UTF-8"
             options.isIncremental = true
             options.isFork = true
@@ -38,7 +39,7 @@ allprojects {
                 listOf(
                     "-Xlint:all",
                     "-Werror",
-                    "--release", "25"
+                    "--release", "21"
                 )
             )
         }
@@ -60,9 +61,9 @@ allprojects {
         - Java Version: $jreVersion
         - Java Home: $jreHome
         - Active Java Toolchain: ${JavaVersion.current()}
-        - Target Java Toolchain: 25
-        - Java Bytecode Target: 25 (sourceCompatibility/targetCompatibility)
-        - Kotlin Compiler Target: 25
+        - Target Java Toolchain: 21 (temporarily for offline build)
+        - Java Bytecode Target: 21 (sourceCompatibility/targetCompatibility)
+        - Kotlin Compiler Target: 21
         - Project: ${project.name} (${project.path})
         ===================================================================""".trimIndent()
         )
