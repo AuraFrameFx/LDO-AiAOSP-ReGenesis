@@ -32,8 +32,4 @@ abstract class AiServiceModule {
     @Binds
     @Singleton
     abstract fun bindCascadeAIService(impl: dev.aurakai.auraframefx.services.DefaultCascadeAIService): dev.aurakai.auraframefx.services.CascadeAIService
-
-    @Binds
-    @Singleton
-    abstract fun bindErrorHandler(impl: dev.aurakai.auraframefx.system.impl.DefaultErrorHandler): dev.aurakai.auraframefx.common.ErrorHandler
 }
