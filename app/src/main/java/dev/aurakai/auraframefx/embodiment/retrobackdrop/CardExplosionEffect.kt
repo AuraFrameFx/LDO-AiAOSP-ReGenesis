@@ -124,7 +124,7 @@ class CardExplosionEffect {
         // Blue/cool colors → Kai (middle)
         // Gray/neutral → Platforms
 
-        val hue = color.red + color.green * 0.5f + color.blue * 0.3f
+        color.red + color.green * 0.5f + color.blue * 0.3f
 
         return when {
             color.red > 0.6f -> Pair(auraTargetX, auraTargetY)  // Orange → Aura

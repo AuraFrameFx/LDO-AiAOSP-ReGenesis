@@ -53,7 +53,7 @@ open class UIRecoveryViewModel @Inject constructor(
      * Get recovery statistics for diagnostics
      */
     fun getRecoveryStats() = viewModelScope.launch {
-        val stats = recoveryManager.getRecoveryStats()
+        recoveryManager.getRecoveryStats()
         // Could emit to UI for settings/diagnostics screen
     }
 }

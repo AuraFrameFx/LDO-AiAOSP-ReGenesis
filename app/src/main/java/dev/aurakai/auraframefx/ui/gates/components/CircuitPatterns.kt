@@ -75,7 +75,7 @@ private fun DrawScope.drawNeuralNetwork(color: Color, alpha: Float, offset: Floa
         val angle = (i * 360f / nodeCount) + offset * 0.1f
         val distance = size.minDimension * 0.35f
         val x = centerX + distance * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat()
-        val y = centerY + distance * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat()
+        val y = centerY + distance * sin(Math.toRadians(angle.toDouble())).toFloat()
 
         // Line from center to node
         drawLine(
@@ -96,7 +96,7 @@ private fun DrawScope.drawNeuralNetwork(color: Color, alpha: Float, offset: Floa
         if (i < nodeCount - 1) {
             val nextAngle = ((i + 1) * 360f / nodeCount) + offset * 0.1f
             val nextX = centerX + distance * kotlin.math.cos(Math.toRadians(nextAngle.toDouble())).toFloat()
-            val nextY = centerY + distance * kotlin.math.sin(Math.toRadians(nextAngle.toDouble())).toFloat()
+            val nextY = centerY + distance * sin(Math.toRadians(nextAngle.toDouble())).toFloat()
 
             drawLine(
                 color = color.copy(alpha = alpha * 0.2f),
@@ -117,7 +117,7 @@ private fun DrawScope.drawTreeBranching(color: Color, alpha: Float) {
         if (depth > 4 || length < 20f) return
 
         val endX = startX + length * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat()
-        val endY = startY + length * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat()
+        val endY = startY + length * sin(Math.toRadians(angle.toDouble())).toFloat()
 
         drawLine(
             color = color.copy(alpha = alpha * (1f - depth * 0.15f)),
@@ -256,7 +256,7 @@ private fun DrawScope.drawHexagon(center: Offset, radius: Float, color: Color, a
         for (i in 0..5) {
             val angle = 60f * i
             val x = center.x + radius * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat()
-            val y = center.y + radius * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat()
+            val y = center.y + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
             if (i == 0) moveTo(x, y) else lineTo(x, y)
         }
         close()

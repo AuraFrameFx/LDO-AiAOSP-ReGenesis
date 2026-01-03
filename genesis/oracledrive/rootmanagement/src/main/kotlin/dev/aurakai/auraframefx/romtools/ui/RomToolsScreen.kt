@@ -485,7 +485,7 @@ private fun MainContentNoProgressPreview() {
         androidVersion = "14",
         securityPatchLevel = "2023-10-01"
     )
-    val romToolsState = dev.aurakai.auraframefx.romtools.RomToolsState(
+    val romToolsState = RomToolsState(
         capabilities = capabilities,
         isInitialized = true
     )

@@ -63,7 +63,7 @@ fun WorkingLabScreen(
     }
 
     // Work behavior executor
-    val executor = remember {
+    remember {
         WorkBehaviorExecutor(engine, cardPositions)
     }
 

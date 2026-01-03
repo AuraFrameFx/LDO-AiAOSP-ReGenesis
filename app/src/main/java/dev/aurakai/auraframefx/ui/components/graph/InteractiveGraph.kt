@@ -62,7 +62,7 @@ fun InteractiveGraph(
     contentPadding: PaddingValues = PaddingValues(16.dp),
 ) {
     var scale by remember { mutableStateOf(1f) }
-    var translation by remember { mutableStateOf(androidx.compose.ui.geometry.Offset.Zero) }
+    var translation by remember { mutableStateOf(Offset.Zero) }
     val infiniteTransition = rememberInfiniteTransition()
     val pulse by infiniteTransition.animateFloat(
         initialValue = 0.95f,
@@ -118,7 +118,7 @@ fun InteractiveGraph(
             nodes.forEach { node ->
                 val isSelected = node.id == selectedNodeId
                 val nodeScale = if (isSelected) pulse else 1f
-                val currentOffset = androidx.compose.ui.geometry.Offset(offsetX, offsetY) + node.position.toCompose() * scale
+                val currentOffset = Offset(offsetX, offsetY) + node.position.toCompose() * scale
 
                 withTransform({
                     translate(
@@ -143,7 +143,7 @@ fun InteractiveGraph(
  * @param translation The current pan offset, shifting the grid accordingly.
  * @param gridColor The color of the grid lines.
  */
-private fun DrawScope.drawGrid(scale: Float, translation: androidx.compose.ui.geometry.Offset, gridColor: Color) {
+private fun DrawScope.drawGrid(scale: Float, translation: Offset, gridColor: Color) {
     val gridSize = 40f * scale // Adjust grid size with scale
     val strokeWidth = (1f / scale).coerceAtLeast(0.5f) // Ensure minimum stroke width
 
@@ -151,8 +151,8 @@ private fun DrawScope.drawGrid(scale: Float, translation: androidx.compose.ui.ge
     while (x < size.width) {
         drawLine(
             color = gridColor,
-            start = androidx.compose.ui.geometry.Offset(x, 0f),
-            end = androidx.compose.ui.geometry.Offset(x, size.height),
+            start = Offset(x, 0f),
+            end = Offset(x, size.height),
             strokeWidth = strokeWidth
         )
         x += gridSize
@@ -162,8 +162,8 @@ private fun DrawScope.drawGrid(scale: Float, translation: androidx.compose.ui.ge
     while (y < size.height) {
         drawLine(
             color = gridColor,
-            start = androidx.compose.ui.geometry.Offset(0f, y),
-            end = androidx.compose.ui.geometry.Offset(size.width, y),
+            start = Offset(0f, y),
+            end = Offset(size.width, y),
             strokeWidth = strokeWidth
         )
         y += gridSize
@@ -329,8 +329,8 @@ private fun DrawScope.drawConnection(
 }
 
 private fun DrawScope.drawArrowHead(
-    tip: androidx.compose.ui.geometry.Offset,
-    direction: androidx.compose.ui.geometry.Offset,
+    tip: Offset,
+    direction: Offset,
     size: Float,
     angle: Float,
     color: Color,
@@ -363,8 +363,8 @@ fun Dp.toPx(drawScope: DrawScope): Float = with(drawScope) { this@toPx.toPx() }
  * @param angle The rotation angle in radians.
  * @return The rotated offset.
  */
-fun androidx.compose.ui.geometry.Offset.rotate(angle: Float): androidx.compose.ui.geometry.Offset {
+fun Offset.rotate(angle: Float): Offset {
     val cosAngle = cos(angle)
     val sinAngle = sin(angle)
-    return androidx.compose.ui.geometry.Offset(x * cosAngle - y * sinAngle, x * sinAngle + y * cosAngle)
+    return Offset(x * cosAngle - y * sinAngle, x * sinAngle + y * cosAngle)
 }
