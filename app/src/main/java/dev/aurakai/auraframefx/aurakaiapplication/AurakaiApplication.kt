@@ -64,7 +64,7 @@ class AurakaiApplication : Application(), Configuration.Provider {
             com.highcapable.yukihookapi.YukiHookAPI.configs {
                 debugLog { isEnable = BuildConfig.DEBUG }
             }
-            com.highcapable.yukihookapi.YukiHookAPI.encased(this)
+            com.highcapable.yukihookapi.YukiHookAPI.encase(this)
             Timber.i("🪝 YukiHookAPI initialized successfully - System constraints loosened")
         } catch (e: Exception) {
             Timber.e(e, "❌ YukiHookAPI initialization failed")

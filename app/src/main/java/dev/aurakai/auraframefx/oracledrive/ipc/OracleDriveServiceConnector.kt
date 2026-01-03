@@ -28,7 +28,7 @@ class OracleDriveServiceConnector(private val context: Context) {
          * @param service The binder interface to the connected service.
          */
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            auraDriveService = IAuraDriveService.Companion.Stub.asInterface(service)
+            auraDriveService = IAuraDriveService.Stub.asInterface(service)
             _isServiceConnected.value = true
         }
 
@@ -94,13 +94,12 @@ class OracleDriveServiceConnector(private val context: Context) {
      *
      * The `packageName` and `enable` parameters are ignored by the remote service.
      *
-     * @return "Success" if the module was toggled successfully, "Failed" if the operation did not succeed, or null if the service is unavailable or a remote exception occurs.
+     * @return The result string from the service, or null if the service is unavailable or a remote exception occurs.
      */
     suspend fun toggleModuleOnOracleDrive(packageName: String, enable: Boolean): String? =
         withContext(Dispatchers.IO) {
             try {
-                val result = auraDriveService?.toggleLSPosedModule(packageName, enable)
-                if (result == true) "Success" else "Failed"
+                auraDriveService?.toggleLSPosedModule(packageName, enable)
             } catch (e: RemoteException) {
                 null
             }
@@ -120,16 +119,15 @@ class OracleDriveServiceConnector(private val context: Context) {
     }
 
     /**
-     * Retrieves the internal diagnostics log from the remote AuraDrive service as a single newline-separated string.
+     * Retrieves the internal diagnostics log from the remote AuraDrive service.
      *
      * Returns null if the service is unavailable or a remote exception occurs.
      *
-     * @return The diagnostics log as a newline-separated string, or null if unavailable.
+     * @return The diagnostics log string, or null if unavailable.
      */
     suspend fun getInternalDiagnosticsLog(): String? = withContext(Dispatchers.IO) {
         try {
-            val logs = auraDriveService?.getInternalDiagnosticsLog()
-            logs?.joinToString("\n")
+            auraDriveService?.getInternalDiagnosticsLog()
         } catch (e: RemoteException) {
             null
         }
