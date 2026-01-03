@@ -180,7 +180,7 @@ class MaintenanceModeDetector @Inject constructor(
             try {
                 // Monitor file system I/O (simplified)
                 val filesDir = context.filesDir
-                val fileCount = filesDir.listFiles()?.size ?: 0
+                filesDir.listFiles()?.size ?: 0
 
                 // If there's heavy file activity, might indicate maintenance
                 // This is a placeholder - real implementation would monitor I/O operations

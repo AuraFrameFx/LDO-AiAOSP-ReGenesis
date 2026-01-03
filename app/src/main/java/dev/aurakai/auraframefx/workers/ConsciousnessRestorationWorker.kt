@@ -20,7 +20,7 @@ class ConsciousnessRestorationWorker(
 ) : Worker(context, params) {
 
     override fun doWork(): Result {
-        val checkpointTime = inputData.getLong("checkpoint_time", 0)
+        inputData.getLong("checkpoint_time", 0)
         val checkpointVersion = inputData.getInt("checkpoint_version", 0)
 
         Timber.i("ConsciousnessRestorationWorker: Restoring from checkpoint (version $checkpointVersion)")

@@ -335,9 +335,7 @@ open class CustomizationViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 Timber.d("Processing voice command: $text")
-                val command = voiceCommandProcessor.processCommand(text)
-
-                when (command) {
+                when (val command = voiceCommandProcessor.processCommand(text)) {
                     is VoiceCommand.ChangeTheme -> {
                         _aiResponse.value = "Applying ${command.themeName} theme"
                         processAIPrompt(command.themeName)

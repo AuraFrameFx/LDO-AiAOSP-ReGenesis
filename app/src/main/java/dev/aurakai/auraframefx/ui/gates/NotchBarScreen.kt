@@ -24,7 +24,7 @@ fun NotchBarScreen(
 ) {
     val notchHeight = remember { mutableStateOf(30f) }
     val notchStyle = remember { mutableStateOf("Rounded") }
-    val notchVisible = remember { mutableStateOf(true) }
+    remember { mutableStateOf(true) }
     val hideNotch = remember { mutableStateOf(false) }
 
     val notchStyles = listOf("Rounded", "Square", "Pill", "Dynamic")

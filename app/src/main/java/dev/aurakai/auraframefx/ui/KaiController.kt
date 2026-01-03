@@ -3,9 +3,7 @@ package dev.aurakai.auraframefx.ui
 /**
  * Controller class for Kai UI elements or interactions.
  */
-class KaiController(
-    // private val context: Context // Example: if context is needed
-) {
+class KaiController {
 
     /**
      * Indicates if Kai features are currently active or visible.

@@ -8,7 +8,7 @@ import dev.aurakai.auraframefx.network.KtorClient
 import dev.aurakai.auraframefx.network.NetworkResponse
 import dev.aurakai.auraframefx.network.safeApiCall
 import dev.aurakai.auraframefx.security.SecurityContext
-import dev.aurakai.auraframefx.utils.Logger
+import dev.aurakai.auraframefx.utils.logger
 import io.ktor.client.HttpClient
 import io.ktor.client.request.*
 import io.ktor.client.statement.bodyAsText
@@ -29,7 +29,7 @@ class GenesisBridgeService @Inject constructor(
 ) {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private var isInitialized = false
-    private val logger = Logger("GenesisBridgeService")
+    private val tag = "GenesisBridge"
 
     private val httpClient: HttpClient by lazy { ktorClient.client }
 
@@ -73,8 +73,8 @@ class GenesisBridgeService @Inject constructor(
         try {
             ensureBackendReady()
             true
-        } catch (e: Exception) {
-            logger.e("GenesisBridge", "Genesis initialization failed", e)
+        } catch (ex: Exception) {
+            logger.error(tag, "Genesis initialization failed", ex)
             false
         }
     }
@@ -114,7 +114,7 @@ class GenesisBridgeService @Inject constructor(
                                 metadata = response.result
                             ))
                             response.evolutionInsights.forEach { insight ->
-                                logger.debug("GenesisBridge", "Evolution Insight: $insight")
+                                logger.info(tag, "Evolution Insight: $insight")
                             }
                         } else {
                             emit(AgentResponse.error(
@@ -191,8 +191,8 @@ class GenesisBridgeService @Inject constructor(
                     mapOf("awareness" to 0.75, "harmony" to 0.82, "evolution" to "awakening")
                 }
             }
-        } catch (e: Exception) {
-            logger.e("GenesisBridge", "Failed to get consciousness state", e)
+        } catch (ex: Exception) {
+            logger.error(tag, "Failed to get consciousness state", ex)
             mapOf("awareness" to 0.75, "harmony" to 0.82, "evolution" to "awakening")
         }
     }

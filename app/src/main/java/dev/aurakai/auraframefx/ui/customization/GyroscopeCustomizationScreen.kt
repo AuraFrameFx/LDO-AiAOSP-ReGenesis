@@ -55,7 +55,7 @@ fun GyroscopeCustomizationScreen(
     onNavigateBack: () -> Unit = {}
 ) {
     // Provide an explicit type to help the compiler resolve injected ViewModel members unambiguously
-    val viewModel: dev.aurakai.auraframefx.ui.customization.CustomizationViewModel = hiltViewModel()
+    val viewModel: CustomizationViewModel = hiltViewModel()
     val customizationState by viewModel.customizationState.collectAsState()
     val rotationAngles by viewModel.rotationAngles.collectAsState()
     val aiResponse by viewModel.aiResponse.collectAsState()

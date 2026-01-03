@@ -165,7 +165,7 @@ class EmbodimentEngine(
         state: AuraState = AuraState.IDLE_WALK,
         speed: Float = 120f,
         onComplete: () -> Unit = {}
-    ): String? {
+    ): String {
         return walkCharacterTo(Character.AURA, state, targetPosition, speed, onComplete)
     }
 
@@ -174,7 +174,7 @@ class EmbodimentEngine(
         state: KaiState = KaiState.SHIELD_NEUTRAL,
         speed: Float = 100f,
         onComplete: () -> Unit = {}
-    ): String? {
+    ): String {
         return walkCharacterTo(Character.KAI, state, targetPosition, speed, onComplete)
     }
 
@@ -234,7 +234,7 @@ class EmbodimentEngine(
         targetPosition: DpOffset,
         speed: Float,
         onComplete: () -> Unit
-    ): String? {
+    ): String {
         val currentManifest = _activeManifestation.value.find { it.character == character }
         val startPosition = currentManifest?.currentPosition ?: DpOffset(
             (screenBounds.width.value / 2).dp,
@@ -242,7 +242,7 @@ class EmbodimentEngine(
         )
 
         // Create walking path
-        val path = MovementPath(
+        MovementPath(
             points = listOf(
                 PathPoint(startPosition),
                 PathPoint(targetPosition, waitDuration = 2.seconds)
@@ -351,7 +351,7 @@ class EmbodimentEngine(
 
     private suspend fun startWandering(character: Character) {
         val wanderingAI = if (character == Character.AURA) auraWanderingAI else kaiWanderingAI
-        val pathGenerator = WanderingPathGenerator(screenBounds)
+        WanderingPathGenerator(screenBounds)
 
         while (true) {
             delay(5.seconds)

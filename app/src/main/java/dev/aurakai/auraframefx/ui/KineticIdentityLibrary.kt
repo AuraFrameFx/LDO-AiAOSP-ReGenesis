@@ -290,8 +290,8 @@ object KineticIdentityLibrary {
     }
 
     data class Particle(
-        val position: androidx.compose.ui.geometry.Offset,
-        val velocity: androidx.compose.ui.geometry.Offset,
+        val position: Offset,
+        val velocity: Offset,
         val life: Float,
         val maxLife: Float,
         val size: Float,

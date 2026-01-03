@@ -3,6 +3,7 @@ package dev.aurakai.auraframefx.navigation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -29,6 +30,7 @@ import dev.aurakai.auraframefx.ui.gates.LSPosedSubmenuScreen
 import dev.aurakai.auraframefx.ui.gates.LiveROMEditorScreen
 import dev.aurakai.auraframefx.ui.gates.LiveSupportChatScreen
 import dev.aurakai.auraframefx.ui.gates.LogsViewerScreen
+import dev.aurakai.auraframefx.ui.gates.SupportChatViewModel
 import dev.aurakai.auraframefx.ui.gates.ModuleCreationScreen
 import dev.aurakai.auraframefx.ui.gates.ModuleManagerScreen
 import dev.aurakai.auraframefx.ui.gates.NotchBarScreen
@@ -233,9 +235,11 @@ fun AppNavGraph(navController: NavHostController) {
         }
 
         composable(route = NavDestination.LiveSupport.route) {
-            // Note: LiveSupportChatScreen requires SupportChatViewModel context
-            // You'll need to provide it via context receiver or pass as parameter
-            LiveSupportChatScreen(onNavigateBack = { navController.popBackStack() })
+            val viewModel = hiltViewModel<SupportChatViewModel>()
+            LiveSupportChatScreen(
+                viewModel = viewModel,
+                onNavigateBack = { navController.popBackStack() }
+            )
         }
 
         composable(route = NavDestination.Documentation.route) {

@@ -263,7 +263,7 @@ private fun TripleLayerBorder(
 ) {
     Canvas(modifier = modifier) {
         val cornerRadius = 24f
-        val borderRect = androidx.compose.ui.geometry.Rect(
+        androidx.compose.ui.geometry.Rect(
             offset = Offset(0f, 0f),
             size = size
         )

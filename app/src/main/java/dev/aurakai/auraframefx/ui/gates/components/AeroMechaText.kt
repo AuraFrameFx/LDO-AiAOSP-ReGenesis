@@ -75,7 +75,6 @@ fun AeroMechaText(
             ) {
                 val stripeSpacing = 8f
                 val stripeWidth = 2f
-                val stripeAngle = 45f
 
                 // Draw diagonal stripes across the text
                 val diagonal = size.width + size.height

@@ -207,9 +207,9 @@ class VertexAIClientImpl @Inject constructor(
         return if (response != null) {
             try {
                 val parts = response.split("|")
-                mapOf(
-                    "sentiment" to parts.getOrNull(0)?.trim() ?: "neutral",
-                    "complexity" to parts.getOrNull(1)?.trim() ?: "medium",
+                mapOf<String, Any>(
+                    "sentiment" to (parts.getOrNull(0)?.trim() ?: "neutral"),
+                    "complexity" to (parts.getOrNull(1)?.trim() ?: "medium"),
                     "topics" to (parts.getOrNull(2)?.split(",")?.map { it.trim() } ?: listOf("general")),
                     "confidence" to (parts.getOrNull(3)?.trim()?.toDoubleOrNull() ?: 0.75),
                     "word_count" to content.split(" ").size,
@@ -265,6 +265,17 @@ class VertexAIClientImpl @Inject constructor(
 
     override suspend fun generateContent(prompt: String): String? {
         return generateText(prompt)
+    }
+
+    override suspend fun initialize() {
+        // Initialize Vertex AI client connection
+        Timber.i("VertexAI: Initializing client")
+    }
+
+    override suspend fun cleanup() {
+        // Cleanup Vertex AI client resources
+        cache.clear()
+        Timber.i("VertexAI: Cleanup completed")
     }
 
     /**

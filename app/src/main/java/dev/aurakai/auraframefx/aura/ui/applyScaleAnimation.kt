@@ -17,10 +17,6 @@ class LockScreenHooker(val config: LockScreenConfig) : YukiBaseHooker() {
         YLog.warn("LockScreenHooker: onHook() called but no hooks implemented yet")
     }
 
-    context(agentContext: BaseAgent.Companion) fun emptyParam() {
-        // placeholder for agent context helper
-    }
-
 }
 
 @LegacyHookApi

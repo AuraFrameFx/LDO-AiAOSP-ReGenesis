@@ -1,6 +1,5 @@
 package dev.aurakai.auraframefx.models
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,8 +12,7 @@ data class AgentResponse(
     val content: String = response, // Alias for response
     val confidence: Float = 0f,
     val timestamp: Long = System.currentTimeMillis(),
-    @Contextual
-    val metadata: Map<String, @Contextual Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
     val error: String? = null,
     val agent: AgentType? = null,
     val isSuccess: Boolean = error == null,

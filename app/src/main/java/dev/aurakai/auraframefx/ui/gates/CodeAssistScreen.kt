@@ -24,7 +24,6 @@ import androidx.navigation.NavHostController
 @Composable
 fun CodeAssistScreen(navController: NavHostController) {
     var codeInput by remember { mutableStateOf("// Ask Code Assist to generate or refactor code...\n\nfun main() {\n    println(\"Hello, Aura!\")\n}") }
-    var aiResponse by remember { mutableStateOf("") }
     var isProcessing by remember { mutableStateOf(false) }
 
     Column(

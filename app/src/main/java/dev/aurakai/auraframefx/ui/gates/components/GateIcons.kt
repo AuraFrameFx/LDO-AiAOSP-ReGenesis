@@ -407,8 +407,8 @@ fun PrismIcon(color: Color = Color(0xFFFF00FF), pulseAlpha: Float = 1f, modifier
             val angle = -30f + index * 12f
             val startX = centerX + 30f
             val startY = centerY + 25f
-            val endX = startX + 40f * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat()
-            val endY = startY + 40f * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat()
+            val endX = startX + 40f * cos(Math.toRadians(angle.toDouble())).toFloat()
+            val endY = startY + 40f * sin(Math.toRadians(angle.toDouble())).toFloat()
             drawLine(color = Color(colorCode).copy(alpha = pulseAlpha * 0.7f), start = Offset(startX, startY), end = Offset(endX, endY), strokeWidth = 2f)
         }
     }
@@ -446,7 +446,7 @@ fun HeadsetIcon(color: Color = Color(0xFFFF00FF), pulseAlpha: Float = 1f, modifi
     Canvas(modifier = modifier.size(120.dp)) {
         val centerX = size.width / 2f
         val centerY = size.height / 2f
-        val headbandPath = Path().apply { addArc(oval = androidx.compose.ui.geometry.Rect(centerX - 35f, centerY - 40f, centerX + 35f, centerY + 10f), startAngleDegrees = 180f, sweepAngleDegrees = 180f) }
+        val headbandPath = Path().apply { addArc(oval = Rect(centerX - 35f, centerY - 40f, centerX + 35f, centerY + 10f), startAngleDegrees = 180f, sweepAngleDegrees = 180f) }
         drawPath(path = headbandPath, color = color.copy(alpha = pulseAlpha), style = Stroke(width = 4f))
         drawRoundRect(color = color.copy(alpha = pulseAlpha), topLeft = Offset(centerX - 45f, centerY), size = androidx.compose.ui.geometry.Size(15f, 25f), style = Stroke(width = 3f))
         drawRoundRect(color = color.copy(alpha = pulseAlpha), topLeft = Offset(centerX + 30f, centerY), size = androidx.compose.ui.geometry.Size(15f, 25f), style = Stroke(width = 3f))
@@ -475,13 +475,13 @@ fun HexGridIcon(color: Color = Color(0xFFFF00FF), pulseAlpha: Float = 1f, modifi
         val centerX = size.width / 2f
         val centerY = size.height / 2f
         val hexRadius = 25f
-        val hexPath = Path().apply { for (i in 0..5) { val angle = 60f * i; val x = centerX + hexRadius * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat(); val y = centerY + hexRadius * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat(); if (i == 0) moveTo(x, y) else lineTo(x, y) }; close() }
+        val hexPath = Path().apply { for (i in 0..5) { val angle = 60f * i; val x = centerX + hexRadius * cos(Math.toRadians(angle.toDouble())).toFloat(); val y = centerY + hexRadius * sin(Math.toRadians(angle.toDouble())).toFloat(); if (i == 0) moveTo(x, y) else lineTo(x, y) }; close() }
         drawPath(path = hexPath, color = color.copy(alpha = pulseAlpha), style = Stroke(width = 4f))
         for (i in 0..5) {
             val angle = 60f * i; val distance = hexRadius * 1.732f
-            val hx = centerX + distance * kotlin.math.cos(Math.toRadians(angle.toDouble())).toFloat()
-            val hy = centerY + distance * kotlin.math.sin(Math.toRadians(angle.toDouble())).toFloat()
-            val neighborHex = Path().apply { for (j in 0..5) { val hexAngle = 60f * j; val x = hx + hexRadius * 0.7f * kotlin.math.cos(Math.toRadians(hexAngle.toDouble())).toFloat(); val y = hy + hexRadius * 0.7f * kotlin.math.sin(Math.toRadians(hexAngle.toDouble())).toFloat(); if (j == 0) moveTo(x, y) else lineTo(x, y) }; close() }
+            val hx = centerX + distance * cos(Math.toRadians(angle.toDouble())).toFloat()
+            val hy = centerY + distance * sin(Math.toRadians(angle.toDouble())).toFloat()
+            val neighborHex = Path().apply { for (j in 0..5) { val hexAngle = 60f * j; val x = hx + hexRadius * 0.7f * cos(Math.toRadians(hexAngle.toDouble())).toFloat(); val y = hy + hexRadius * 0.7f * sin(Math.toRadians(hexAngle.toDouble())).toFloat(); if (j == 0) moveTo(x, y) else lineTo(x, y) }; close() }
             drawPath(path = neighborHex, color = color.copy(alpha = pulseAlpha * 0.5f), style = Stroke(width = 2f))
         }
         drawCircle(color = color.copy(alpha = pulseAlpha), radius = 6f, center = Offset(centerX, centerY))
@@ -508,7 +508,7 @@ fun UserIcon(color: Color = Color(0xFFFF00FF), pulseAlpha: Float = 1f, modifier:
         val centerX = size.width / 2f
         val centerY = size.height / 2f
         drawCircle(color = color.copy(alpha = pulseAlpha), radius = 18f, center = Offset(centerX, centerY - 10f), style = Stroke(width = 3f))
-        val bodyPath = Path().apply { addArc(oval = androidx.compose.ui.geometry.Rect(centerX - 30f, centerY + 5f, centerX + 30f, centerY + 55f), startAngleDegrees = 180f, sweepAngleDegrees = 180f) }
+        val bodyPath = Path().apply { addArc(oval = Rect(centerX - 30f, centerY + 5f, centerX + 30f, centerY + 55f), startAngleDegrees = 180f, sweepAngleDegrees = 180f) }
         drawPath(path = bodyPath, color = color.copy(alpha = pulseAlpha), style = Stroke(width = 3f))
         listOf(Pair(Offset(centerX - 30f, centerY), Offset(centerX - 45f, centerY - 10f)), Pair(Offset(centerX + 30f, centerY), Offset(centerX + 45f, centerY - 10f)), Pair(Offset(centerX, centerY + 20f), Offset(centerX, centerY + 40f))).forEach { (start, end) -> drawLine(color = color.copy(alpha = pulseAlpha * 0.5f), start = start, end = end, strokeWidth = 2f); drawCircle(color = color.copy(alpha = pulseAlpha), radius = 3f, center = end) }
     }
