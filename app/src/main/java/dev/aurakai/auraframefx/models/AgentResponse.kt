@@ -1,6 +1,5 @@
 package dev.aurakai.auraframefx.models
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 /**
