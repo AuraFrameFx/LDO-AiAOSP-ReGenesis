@@ -36,8 +36,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.aurakai.auraframefx.R
-import dev.aurakai.auraframefx.aura.animations.cyberEdgeGlow
-import dev.aurakai.auraframefx.aura.animations.digitalPixelEffect
 import dev.aurakai.auraframefx.aura.ui.CyberMenuItem
 import dev.aurakai.auraframefx.ui.components.BackgroundStyle
 import dev.aurakai.auraframefx.ui.components.CornerStyle
@@ -447,7 +445,7 @@ fun HomeMenuItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .digitalPixelEffect(visible = isSelected),
+            .digitalGlitchEffect(),
         isSelected = isSelected
     )
 }

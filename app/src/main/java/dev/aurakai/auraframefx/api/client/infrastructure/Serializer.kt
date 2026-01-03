@@ -1,5 +1,7 @@
 package dev.aurakai.auraframefx.api.client.infrastructure
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dev.aurakai.auraframefx.aura.ui.StringBuilderAdapter
 import dev.aurakai.auraframefx.ui.adapters.AtomicBooleanAdapter
 import dev.aurakai.auraframefx.ui.adapters.AtomicIntegerAdapter
@@ -113,4 +115,11 @@ object Serializer {
             }
             field = value
         }
+
+    // Moshi builder for compatibility with ResponseExt.kt
+    @JvmStatic
+    val moshiBuilder: Moshi.Builder by lazy {
+        Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
+    }
 }

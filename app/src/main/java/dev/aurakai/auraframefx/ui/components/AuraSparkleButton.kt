@@ -12,9 +12,9 @@ import dev.aurakai.auraframefx.ui.theme.NeonTeal
 
 @Composable
 fun AuraSparkleButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
     text: String = "Sparkle",
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) { // Renamed to auraSparkleButton
     // TODO: Implement the actual Aura Sparkle Button with custom animation/effects
     Button(
@@ -27,11 +27,7 @@ fun AuraSparkleButton(
     ) {
         Text(
             text = text,
-            color = NeonTeal,
-            modifier = Modifier.shadow(
-                elevation = 12.dp,
-                shape = RoundedCornerShape(50)
-            )
+            color = NeonTeal
         )
     }
 }

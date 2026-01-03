@@ -98,7 +98,7 @@ object OracleDriveModule {
         securityContext: SecurityContext,
     ): OracleDriveApi {
         return Retrofit.Builder()
-            .baseUrl(securityContext.getApiBaseUrl() + "/oracle/drive/")
+            .baseUrl("https://api.placeholder.dev/oracle/drive/") // Placeholder URL
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

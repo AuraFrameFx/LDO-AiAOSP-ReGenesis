@@ -23,7 +23,11 @@
       "Bash(ls -la \"C:\\Users\\Wehtt\\Downloads\\Finale\\app\\src\\main\\java\\dev\\aurakai\\auraframefx\\model\"\" 2>&1 || echo \"Directory does not exist \")",
       "Bash(cmd /c \"gradlew.bat clean --no-daemon\")",
       "Bash(cmd /c \"gradlew.bat assembleDebug --no-daemon 2>&1 | tail -150\")",
-      "Bash(cmd /c \"gradlew.bat assembleDebug --no-daemon 2>&1\")"
+      "Bash(cmd /c \"gradlew.bat assembleDebug --no-daemon 2>&1\")",
+      "Bash(./gradlew compileDebugKotlin:*)",
+      "Bash(./gradlew tasks:*)",
+      "Bash(git remote add:*)",
+      "Bash(git fetch:*)"
     ]
   }
 }

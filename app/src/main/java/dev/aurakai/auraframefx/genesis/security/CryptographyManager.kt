@@ -6,6 +6,8 @@ interface CryptographyManager {
     fun encrypt(input: ByteArray): ByteArray
     fun decrypt(input: ByteArray): ByteArray
     fun generateSecureToken(): String
+    fun encryptData(data: ByteArray): ByteArray
+    fun decryptData(data: ByteArray): ByteArray
 
     companion object {
         fun getInstance(context: Context): CryptographyManager {

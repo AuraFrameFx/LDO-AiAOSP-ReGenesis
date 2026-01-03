@@ -121,6 +121,16 @@ class RealVertexAIClientImpl(
         i(TAG, "Creative models initialized (config applied)")
     }
 
+    override suspend fun initialize() {
+        // TODO: Implement initialization logic if needed
+        AuraFxLogger.i(TAG, "RealVertexAIClient initialized")
+    }
+
+    override suspend fun cleanup() {
+        // TODO: Implement cleanup logic if needed
+        AuraFxLogger.i(TAG, "RealVertexAIClient cleaned up")
+    }
+
     override suspend fun analyzeImage(imageData: ByteArray, prompt: String): String {
         // TODO: Implement actual image analysis using GenerativeModel (support pending in this impl wrapper)
         AuraFxLogger.warn(TAG, "Image analysis requested but not fully implemented in RealVertexAIClientImpl yet.")

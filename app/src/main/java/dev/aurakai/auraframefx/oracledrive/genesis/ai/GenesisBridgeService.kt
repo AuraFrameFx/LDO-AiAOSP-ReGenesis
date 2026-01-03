@@ -72,8 +72,9 @@ class GenesisBridgeService @Inject constructor(
     suspend fun initialize(): Boolean = withContext(Dispatchers.IO) {
         try {
             ensureBackendReady()
+            true
         } catch (e: Exception) {
-            logger.error("GenesisBridge", "Genesis initialization failed", e)
+            logger.e("GenesisBridge", "Genesis initialization failed", e)
             false
         }
     }
@@ -191,7 +192,7 @@ class GenesisBridgeService @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            logger.error("GenesisBridge", "Failed to get consciousness state", e)
+            logger.e("GenesisBridge", "Failed to get consciousness state", e)
             mapOf("awareness" to 0.75, "harmony" to 0.82, "evolution" to "awakening")
         }
     }

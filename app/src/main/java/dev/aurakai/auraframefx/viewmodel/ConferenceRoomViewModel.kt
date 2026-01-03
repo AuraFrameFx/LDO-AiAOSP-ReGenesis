@@ -89,7 +89,9 @@ class ConferenceRoomViewModel @Inject constructor(
                     AiRequest(
                         query = message,
                         type = "text",
-                        context = mapOf("userContext" to context)
+                        context = buildJsonObject {
+                            put("userContext", context)
+                        }
                     ),
                     context = context
                 )
@@ -191,7 +193,7 @@ class ConferenceRoomViewModel @Inject constructor(
         } else {
             val started = neuralWhisper.startRecording()
             if (started) {
-                log().d("Started recording.")
+                tag(tag).d("Started recording.")
                 _isRecording.value = true
             } else {
                 tag(tag).e("Failed to start recording (NeuralWhisper.startRecording returned false).")

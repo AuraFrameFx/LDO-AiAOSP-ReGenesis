@@ -10,6 +10,8 @@ interface SecureStorage {
     fun storeMetadata(key: String, metadata: FileMetadata)
     fun removeMetadata(key: String)
     fun getMetadata(key: String): FileMetadata?
+    fun saveEncryptedData(key: String, data: ByteArray)
+    fun deleteEncryptedData(key: String)
 
     companion object {
         fun getInstance(context: Context, cryptoManager: CryptographyManager): SecureStorage {
@@ -35,5 +37,13 @@ class DefaultSecureStorage(
 
     override fun getMetadata(key: String): FileMetadata? {
         return null
+    }
+
+    override fun saveEncryptedData(key: String, data: ByteArray) {
+        // Placeholder - save encrypted data
+    }
+
+    override fun deleteEncryptedData(key: String) {
+        // Placeholder - delete encrypted data
     }
 }

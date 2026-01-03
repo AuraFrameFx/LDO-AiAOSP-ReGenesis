@@ -23,6 +23,8 @@ interface AuraAIService {
     suspend fun generateTheme(preferences: ThemePreferences, context: String = ""): ThemeConfiguration
     fun processRequestFlow(request: AiRequest): Flow<AgentResponse>
     suspend fun processRequest(request: AiRequest, context: String): AgentResponse
+    suspend fun discernThemeIntent(query: String): String
+    suspend fun suggestThemes(contextQuery: String): List<String>
 }
 
 
@@ -73,5 +75,31 @@ class DefaultAuraAIService @Inject constructor() : AuraAIService {
             confidence = 1.0f,
             agent = AgentType.AURA
         )
+    }
+
+    override suspend fun discernThemeIntent(query: String): String {
+        // TODO: Implement AI-based theme intent detection
+        // For now, use simple keyword matching
+        val lowerQuery = query.lowercase()
+        return when {
+            lowerQuery.contains("cyber") || lowerQuery.contains("neon") || lowerQuery.contains("matrix") -> "cyberpunk"
+            lowerQuery.contains("solar") || lowerQuery.contains("bright") || lowerQuery.contains("cheerful") -> "solar"
+            lowerQuery.contains("nature") || lowerQuery.contains("forest") || lowerQuery.contains("calm") -> "nature"
+            lowerQuery.contains("energetic") || lowerQuery.contains("vibrant") -> "energetic"
+            else -> "default"
+        }
+    }
+
+    override suspend fun suggestThemes(contextQuery: String): List<String> {
+        // TODO: Implement AI-based theme suggestions
+        // For now, return basic suggestions based on context
+        val lowerQuery = contextQuery.lowercase()
+        return when {
+            lowerQuery.contains("morning") -> listOf("solar", "nature")
+            lowerQuery.contains("evening") || lowerQuery.contains("night") -> listOf("cyberpunk", "nature")
+            lowerQuery.contains("working") -> listOf("cyberpunk", "solar")
+            lowerQuery.contains("relaxing") -> listOf("nature", "solar")
+            else -> listOf("nature", "solar", "cyberpunk")
+        }
     }
 }

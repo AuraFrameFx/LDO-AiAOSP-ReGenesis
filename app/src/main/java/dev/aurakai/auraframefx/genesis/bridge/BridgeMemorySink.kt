@@ -3,12 +3,13 @@ package dev.aurakai.auraframefx.genesis.bridge
 import dev.aurakai.auraframefx.agents.growthmetrics.nexusmemory.data.local.entity.MemoryEntity
 import dev.aurakai.auraframefx.agents.growthmetrics.nexusmemory.data.local.entity.MemoryType
 import dev.aurakai.auraframefx.agents.growthmetrics.nexusmemory.domain.repository.NexusMemoryRepository
+import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface BridgeMemorySink {
     suspend fun persistInteraction(record: InteractionRecord): Long
-    suspend fun queryRelevantMemories(persona: Persona, contextTags: List<String>, limit: Int = 10): List<AgentMemoryEntity>
+    suspend fun queryRelevantMemories(persona: Persona, contextTags: List<String>, limit: Int = 10): List<MemoryEntity>
     suspend fun updateMemoryImportance(memoryId: Long, importanceDelta: Int)
 }
 
@@ -16,8 +17,9 @@ interface BridgeMemorySink {
 class NexusMemoryBridgeSink @Inject constructor(
     private val nexusRepo: NexusMemoryRepository
 ) : BridgeMemorySink {
-    
+
     override suspend fun persistInteraction(record: InteractionRecord): Long {
+        // Adapted to use InteractionRecord from GenesisBridge.kt
         return nexusRepo.saveMemory(
             content = "${record.request.message}\n${record.response.synthesis}",
             type = MemoryType.CONVERSATION,
@@ -26,15 +28,15 @@ class NexusMemoryBridgeSink @Inject constructor(
             key = record.correlationId
         )
     }
-    
+
     override suspend fun queryRelevantMemories(
         persona: Persona,
         contextTags: List<String>,
         limit: Int
     ): List<MemoryEntity> {
-        return nexusRepo.searchMemories(contextTags.joinToString(" ")).first()
+        return nexusRepo.searchMemories(contextTags.joinToString(" ")).firstOrNull() ?: emptyList()
     }
-    
+
     override suspend fun updateMemoryImportance(memoryId: Long, importanceDelta: Int) {
         val memory = nexusRepo.getMemoryById(memoryId) ?: return
         nexusRepo.updateMemory(

@@ -77,4 +77,37 @@ class KeystoreManager @Inject constructor(
     fun removeKey(alias: String) {
         keyStore.deleteEntry(alias)
     }
+
+    /**
+     * Gets or creates the secret key for encryption/decryption.
+     * @return The secret key, or null if creation fails
+     */
+    fun getOrCreateSecretKey(): SecretKey? {
+        return try {
+            if (!keyStore.containsAlias(KEY_ALIAS)) {
+                generateMasterKey()
+            }
+            getMasterKey()
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to get or create secret key")
+            null
+        }
+    }
+
+    /**
+     * Gets a decryption cipher initialized with the given IV.
+     * @param iv The initialization vector
+     * @return The initialized cipher, or null if initialization fails
+     */
+    fun getDecryptionCipher(iv: ByteArray): Cipher? {
+        return try {
+            val cipher = Cipher.getInstance(TRANSFORMATION)
+            val spec = GCMParameterSpec(GCM_TAG_LENGTH, iv)
+            cipher.init(Cipher.DECRYPT_MODE, getMasterKey(), spec)
+            cipher
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to initialize decryption cipher")
+            null
+        }
+    }
 }

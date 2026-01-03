@@ -306,6 +306,16 @@ class SecurityContext @Inject constructor(
         )
         Timber.tag(TAG).d("Validating request of type: $requestType")
     }
+
+    /**
+     * Checks if the security context is in a secure state
+     * @return true if encryption is active and no critical threats detected
+     */
+    fun isSecure(): Boolean {
+        return _encryptionStatus.value == EncryptionStatus.ACTIVE &&
+                !_securityState.value.errorState &&
+                _securityState.value.threatLevel != ThreatLevel.CRITICAL
+    }
 }
 
 @Serializable

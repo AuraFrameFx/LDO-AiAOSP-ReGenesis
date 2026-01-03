@@ -267,27 +267,29 @@ open class AgentViewModel @Inject constructor(
                     val request = AiRequest(
                         query = userMessage,
                         type = "chat",
-                        context = mapOf("source" to "direct_chat")
+                        context = buildJsonObject {
+                            put("source", "direct_chat")
+                        }
                     )
                     val response = genesisAgent.processRequest(request, "direct_chat")
                     response.content
                 }
                 "Aura" -> {
                     val interaction = EnhancedInteractionData(
-                        query = userMessage,
+                        content = userMessage,
                         context = buildJsonObject {
                             put("mode", "creative_chat")
-                        }
+                        }.toString()
                     )
                     val response = auraAgent.handleCreativeInteraction(interaction)
                     response.content
                 }
                 "Kai" -> {
                     val interaction = EnhancedInteractionData(
-                        query = userMessage,
+                        content = userMessage,
                         context = buildJsonObject {
                             put("mode", "security_chat")
-                        }
+                        }.toString()
                     )
                     val response = kaiAgent.handleSecurityInteraction(interaction)
                     response.content
@@ -296,7 +298,9 @@ open class AgentViewModel @Inject constructor(
                     val request = AiRequest(
                         query = "As Cascade, the analytics specialist: $userMessage",
                         type = "chat",
-                        context = mapOf("agent_persona" to "cascade")
+                        context = buildJsonObject {
+                            put("agent_persona", "cascade")
+                        }
                     )
                     val response = genesisAgent.processRequest(request, "cascade")
                     response.content
@@ -305,7 +309,9 @@ open class AgentViewModel @Inject constructor(
                     val request = AiRequest(
                         query = "As Claude, the build system architect: $userMessage",
                         type = "chat",
-                        context = mapOf("agent_persona" to "claude")
+                        context = buildJsonObject {
+                            put("agent_persona", "claude")
+                        }
                     )
                     val response = genesisAgent.processRequest(request, "claude")
                     response.content
