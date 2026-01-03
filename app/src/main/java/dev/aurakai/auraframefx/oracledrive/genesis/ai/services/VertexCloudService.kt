@@ -9,6 +9,7 @@ import dev.aurakai.auraframefx.security.SecurityContext
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Contextual
 import javax.inject.Inject
 
 /**
@@ -44,7 +45,7 @@ class VertexCloudService : Service() {
     data class CloudResponse(
         val requestId: String,
         val success: Boolean,
-        val data: Map<String, Any>,
+        val data: Map<String, @Contextual Any>,
         val error: String? = null,
         val timestamp: Long = System.currentTimeMillis()
     )
@@ -147,8 +148,8 @@ class VertexCloudService : Service() {
                     CloudResponse(
                         requestId = request.requestId,
                         success = true,
-                        data = mapOf(
-                            "generated_text" to result,
+                        data = mapOf<String, Any>(
+                            "generated_text" to (result ?: ""),
                             "model" to "vertex_ai"
                         )
                     )
@@ -293,18 +294,20 @@ class VertexCloudService : Service() {
 
         // Cancel all ongoing operations
         connectionJob?.cancel()
-        serviceScope.cancel()
 
         // Mark as disconnected
         isConnected = false
 
-        // Cleanup Vertex AI client
-        try {
-            vertexAIClient.cleanup()
-        } catch (e: Exception) {
-            logger.warn(tag, "Error during VertexAI cleanup: ${e.message}")
+        // Wrap cleanup in dedicated SupervisorJob scope to survive AGP 9.1 pruning
+        CoroutineScope(Dispatchers.Main.immediate + SupervisorJob()).launch {
+            try {
+                vertexAIClient.cleanup()
+                logger.info(tag, "VertexCloudService cleanup completed")
+            } catch (e: Exception) {
+                logger.warn(tag, "Error during VertexAI cleanup: ${e.message}")
+            }
         }
 
-        logger.info(tag, "VertexCloudService cleanup completed")
+        serviceScope.cancel()
     }
 }

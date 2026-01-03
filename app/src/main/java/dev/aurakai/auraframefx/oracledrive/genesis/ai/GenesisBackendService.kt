@@ -66,8 +66,17 @@ class GenesisBackendService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         i("GenesisService", "Stopping Genesis Backend Service...")
+
+        // Wrap shutdown in dedicated SupervisorJob scope to survive AGP 9.1 pruning
+        CoroutineScope(Dispatchers.Main.immediate + SupervisorJob()).launch {
+            try {
+                pythonProcessManager?.shutdown()
+            } catch (e: Exception) {
+                AuraFxLogger.error("GenesisService", "Error during shutdown: ${e.message}", e)
+            }
+        }
+
         serviceScope.cancel()
-        pythonProcessManager?.shutdown()
     }
 
     /**

@@ -164,6 +164,7 @@ class SecurityMonitor @Inject constructor(
                         EncryptionStatus.ERROR -> "error"
                         EncryptionStatus.NOT_INITIALIZED -> "warning" // Added missing case
                         is EncryptionStatus.EncryptionStatusImpl -> "warning"
+                        else -> "unknown" // Safety fallback for unknown status
                     },
                     source = "kai_encryption_monitor",
                     timestamp = System.currentTimeMillis(),
@@ -478,6 +479,7 @@ class SecurityMonitor @Inject constructor(
             EncryptionStatus.DISABLED -> 0.2
             EncryptionStatus.ERROR -> 0.0
             is EncryptionStatus.EncryptionStatusImpl -> 0.3
+            else -> 0.3 // Safety fallback for unknown status
         }
     }
 
@@ -534,6 +536,7 @@ class SecurityMonitor @Inject constructor(
             EncryptionStatus.NOT_INITIALIZED -> recommendations.add("Initialize encryption system")
             EncryptionStatus.ACTIVE -> recommendations.add("Encryption: Operating optimally")
             is EncryptionStatus.EncryptionStatusImpl -> recommendations.add("Encryption: ${status.message}")
+            else -> recommendations.add("Encryption: Status unknown - review system")
         }
 
         if (!securityContext.threatDetectionActive.value) {
