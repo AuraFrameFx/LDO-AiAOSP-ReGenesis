@@ -105,10 +105,10 @@ abstract class BaseAgent(
     /**
      * Gets agent-specific configuration
      */
-    protected open fun getAgentConfig(): Map<String, Any> {
+    protected open fun getAgentConfig(): Map<String, String> {
         return mapOf(
             "name" to agentName,
-            "type" to agentType,
+            "type" to agentType.toString(),
             "version" to TOPL_VL
         )
     }
@@ -132,7 +132,7 @@ abstract class BaseAgent(
      */
     protected fun createSuccessResponse(
         content: String,
-        metadata: Map<String, Any> = emptyMap()
+        metadata: Map<String, String> = emptyMap()
     ): AgentResponse {
         return AgentResponse.success(
             content = content,
@@ -152,7 +152,7 @@ abstract class BaseAgent(
     /**
      * Logs agent activity (can be overridden for specific logging needs)
      */
-    protected open fun logActivity(activity: String, details: Map<String, Any> = emptyMap()) {
+    protected open fun logActivity(activity: String, details: Map<String, String> = emptyMap()) {
         println("[$agentName] $activity: $details")
     }
 

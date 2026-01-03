@@ -131,7 +131,7 @@ class VertexCloudService : Service() {
                         data = mapOf(
                             "status" to "healthy",
                             "service" to "vertex_ai_cloud",
-                            "timestamp" to System.currentTimeMillis()
+                            "timestamp" to System.currentTimeMillis().toString()
                         )
                     )
                 }
@@ -147,7 +147,7 @@ class VertexCloudService : Service() {
                     CloudResponse(
                         requestId = request.requestId,
                         success = true,
-                        data = mapOf<String, Any>(
+                        data = mapOf(
                             "generated_text" to (result ?: ""),
                             "model" to "vertex_ai"
                         )
@@ -167,7 +167,7 @@ class VertexCloudService : Service() {
                         success = true,
                         data = mapOf(
                             "analysis_result" to analysis,
-                            "confidence" to 0.9
+                            "confidence" to "0.9"
                         )
                     )
                 }

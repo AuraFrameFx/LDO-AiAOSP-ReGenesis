@@ -27,7 +27,7 @@ data class AgentResponse(
             content: String,
             agentName: String = "",
             confidence: Float = 1.0f,
-            metadata: Map<String, Any> = emptyMap(),
+            metadata: Map<String, String> = emptyMap(),
             agent: AgentType? = null
         ): AgentResponse = AgentResponse(
             agentName = agentName,
